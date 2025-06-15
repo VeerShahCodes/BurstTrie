@@ -1,7 +1,7 @@
 ﻿namespace BurstTrie
 {
-    public class Class1
+    public class BurstTrie
     {
-
+        
     }
 }
