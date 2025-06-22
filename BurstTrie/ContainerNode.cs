@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using BinarySearchTree;
@@ -24,13 +25,13 @@ namespace BurstTrie
         {
             binarySearchTree.Insert(value);
             count++;
-            if(Count >= 5)
+            if (Count >= 5)
             {
                 return new InternalNode(this.ParentTrie, Values, index);
             }
             return this;
-            
-           // throw new NotImplementedException();
+
+            // throw new NotImplementedException();
         }
 
         public override BurstNode? Remove(string value, int index, out bool success)
@@ -43,12 +44,40 @@ namespace BurstTrie
 
         public override BurstNode? Search(string prefix, int index)
         {
-            throw new NotImplementedException();
+            EqualityComparer<string> equality = EqualityComparer<string>.Create(
+                (prefix, value) =>
+                {
+                    if (prefix.Length > value.Length)
+                    {
+                        return false;
+                    }
+
+                    for (int i = 0; i <= index; i++)
+                    {
+                        if (prefix[i] != value[i])
+                        {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+            );
+
+            if (binarySearchTree.FindNode(prefix, equality) != null)
+            {
+                return this;
+            }
+            return null;
         }
 
         internal override void GetAll(List<string> output)
         {
-            throw new NotImplementedException();
+            List<string> values = binarySearchTree.InOrderTraversal().Select(x => x.Value).ToList();
+            for (int i = 0; i < values.Count; i++)
+            {
+                output.Add(values[i]);
+            }
         }
     }
 }

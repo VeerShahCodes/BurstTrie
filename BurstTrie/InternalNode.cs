@@ -55,12 +55,22 @@ namespace BurstTrie
 
         public override BurstNode? Search(string prefix, int index)
         {
-            throw new NotImplementedException();
+            if (otherNodes[prefix[index] - 'a' + 1] == null)
+            {
+                return null;
+            }
+            return otherNodes[prefix[index] - 'a' + 1].Search(prefix, index + 1);
         }
 
         internal override void GetAll(List<string> output)
         {
-            throw new NotImplementedException();
+            for(int i = 0; i < otherNodes.Length; i++)
+            {
+                if (otherNodes[i] != null)
+                {
+                    otherNodes[i].GetAll(output);
+                }
+            }
         }
     }
 }

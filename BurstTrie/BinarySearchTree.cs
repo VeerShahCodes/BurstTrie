@@ -60,30 +60,48 @@ namespace BinarySearchTree
 
         public Node<T> FindNode(T value)
         {
+            return FindNode(value, EqualityComparer<T>.Default);
+        }
+
+        public Node<T> FindNode(T value, EqualityComparer<T> findComparer)
+        {
             Node<T> current = Root;
 
-            if(Root.LeftChild == null && Root.RightChild == null)
+            if (Root.LeftChild == null && Root.RightChild == null && Root.Value.Equals(value) == false)
             {
-                throw new Exception("there is no wwere to go");
+                return null;
             }
             else
             {
-                while (!current.Value.Equals(value))
+                while (!findComparer.Equals(value, current.Value))
                 {
+                    if (current.LeftChild == null && current.RightChild == null)
+                    {
+                        return null;
+                    }
                     if (value.CompareTo(current.Value) < 0)
                     {
                         current = current.LeftChild;
+                        if(current == null)
+                        {
+                            return null;
+                        }
 
                     }
-                    else if(value.CompareTo(current.Value) > 0)
+                    else if (value.CompareTo(current.Value) > 0)
                     {
                         current = current.RightChild;
+                        if (current == null)
+                        {
+                            return null;
+                        }
 
                     }
                 }
-                return current;
             }
+            return current;
         }
+
         public bool DelNode(T value)
         {
 
