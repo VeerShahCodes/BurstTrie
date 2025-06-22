@@ -15,7 +15,8 @@
 
         public void Remove(string value)
         {
-
+            ;
+            Root = Root.Remove(value, 0, out bool success);
         }
     }
 }

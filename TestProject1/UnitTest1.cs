@@ -18,5 +18,28 @@ namespace TestProject1
             burstTrie.Insert("hzang");
             ;
         }
+
+        [Fact]
+
+        public void DeleteTest()
+        {
+            BurstTrie.BurstTrie burstTrie = new BurstTrie.BurstTrie();
+            burstTrie.Insert("hello");
+            burstTrie.Insert("happy");
+            burstTrie.Insert("halloween");
+            burstTrie.Insert("hector");
+            burstTrie.Insert("hack");
+            burstTrie.Insert("apple");
+            burstTrie.Insert("salamander");
+            burstTrie.Insert("dragon");
+            burstTrie.Insert("hexagon");
+
+
+            burstTrie.Remove("hector");
+            burstTrie.Remove("happy");
+            burstTrie.Remove("hello");
+            burstTrie.Remove("halloween");
+            ;
+        }
     }
 }

@@ -23,7 +23,8 @@ namespace BurstTrie
             }
         }
 
-        public override int Count => throw new NotImplementedException();
+        private int count;
+        public override int Count => count;
 
         public override BurstNode Insert(string value, int index)
         {
@@ -32,14 +33,24 @@ namespace BurstTrie
                 otherNodes[value[index] - 'a' + 1] = new ContainerNode(ParentTrie);
             }
             otherNodes[value[index] - 'a' + 1] = otherNodes[value[index] - 'a' + 1].Insert(value, index + 1);
+            count++;
+            if (count == 0) return null;
             return this;
 
         }
 
         public override BurstNode? Remove(string value, int index, out bool success)
         {
-            otherNodes[value[index] - 'a' + 1] 
-            throw new NotImplementedException();
+            
+            if (otherNodes[value[index] - 'a' + 1] == null)
+            {
+                success = false;
+                return null;
+            }
+            otherNodes[value[index] - 'a' + 1] = otherNodes[value[index] - 'a' + 1].Remove(value, index + 1, out bool success2);
+            success = success2;
+            count--;
+            return this;
         }
 
         public override BurstNode? Search(string prefix, int index)

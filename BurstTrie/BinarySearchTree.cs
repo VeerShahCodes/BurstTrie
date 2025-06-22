@@ -84,7 +84,7 @@ namespace BinarySearchTree
                 return current;
             }
         }
-        public void DelNode(T value)
+        public bool DelNode(T value)
         {
 
             Node<T> current = Root;
@@ -92,7 +92,12 @@ namespace BinarySearchTree
             bool right = false;
             if (Root.LeftChild == null && Root.RightChild == null)
             {
-                throw new Exception("there is no whhhhere to go");
+                if(value.CompareTo(Root.Value) == 0)
+                {
+                    Root = null;
+                    return true;
+                }
+                return false;
             }
             else
             {
@@ -128,25 +133,44 @@ namespace BinarySearchTree
             }
             else if(current.LeftChild != null && current.RightChild == null)
             {
-                if (right == true)
+                if(current == Root)
                 {
-                    currentParent.RightChild = current.LeftChild;
+                    Root = current.LeftChild;
+                 //   current = current.LeftChild;
                 }
                 else
                 {
-                    currentParent.LeftChild = current.LeftChild;
+                    if (right == true)
+                    {
+                        currentParent.RightChild = current.LeftChild;
+                    }
+                    else
+                    {
+                        currentParent.LeftChild = current.LeftChild;
+                    }
                 }
+
             }
             else if (current.LeftChild == null && current.RightChild != null)
             {
-                if (right == true)
+                if(current == Root)
                 {
-                    currentParent.RightChild = current.RightChild;
+                    Root = current.RightChild;
+                    //current = current.RightChild;
+                    
                 }
                 else
                 {
-                    currentParent.LeftChild = current.RightChild;
+                    if (right == true)
+                    {
+                        currentParent.RightChild = current.RightChild;
+                    }
+                    else
+                    {
+                        currentParent.LeftChild = current.RightChild;
+                    }
                 }
+
             }
             else
             {
@@ -185,6 +209,7 @@ namespace BinarySearchTree
                 
 
             }
+            return true;
 
             
         }

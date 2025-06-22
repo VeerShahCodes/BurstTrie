@@ -35,9 +35,9 @@ namespace BurstTrie
 
         public override BurstNode? Remove(string value, int index, out bool success)
         {
-            binarySearchTree.DelNode(value);
+            success = binarySearchTree.DelNode(value);
             count--;
-            success = true;
+            if (count == 0) return null;
             return this;
         }
 
