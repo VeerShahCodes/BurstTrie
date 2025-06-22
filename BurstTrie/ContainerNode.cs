@@ -35,7 +35,10 @@ namespace BurstTrie
 
         public override BurstNode? Remove(string value, int index, out bool success)
         {
-            throw new NotImplementedException();
+            binarySearchTree.DelNode(value);
+            count--;
+            success = true;
+            return this;
         }
 
         public override BurstNode? Search(string prefix, int index)

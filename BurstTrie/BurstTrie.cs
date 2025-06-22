@@ -12,5 +12,10 @@
         {
             Root = Root.Insert(value, 0);
         }
+
+        public void Remove(string value)
+        {
+
+        }
     }
 }

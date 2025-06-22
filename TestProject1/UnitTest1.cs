@@ -14,6 +14,8 @@ namespace TestProject1
             burstTrie.Insert("apple");
             burstTrie.Insert("salamander");
             burstTrie.Insert("dragon");
+            burstTrie.Insert("hexagon");
+            burstTrie.Insert("hzang");
             ;
         }
     }

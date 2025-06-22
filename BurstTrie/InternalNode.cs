@@ -27,17 +27,18 @@ namespace BurstTrie
 
         public override BurstNode Insert(string value, int index)
         {
-            if (otherNodes[value[index] - 'a'] == null)
+            if (otherNodes[value[index] - 'a' + 1] == null)
             {
-                otherNodes[value[index] - 'a'] = new ContainerNode(ParentTrie);
+                otherNodes[value[index] - 'a' + 1] = new ContainerNode(ParentTrie);
             }
-            otherNodes[index] = otherNodes[index].Insert(value, index + 1);
+            otherNodes[value[index] - 'a' + 1] = otherNodes[value[index] - 'a' + 1].Insert(value, index + 1);
             return this;
 
         }
 
         public override BurstNode? Remove(string value, int index, out bool success)
         {
+            otherNodes[value[index] - 'a' + 1] 
             throw new NotImplementedException();
         }
 
