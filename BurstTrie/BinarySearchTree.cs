@@ -73,6 +73,7 @@ namespace BinarySearchTree
             }
             else
             {
+               
                 while (!findComparer.Equals(value, current.Value))
                 {
                     if (current.LeftChild == null && current.RightChild == null)

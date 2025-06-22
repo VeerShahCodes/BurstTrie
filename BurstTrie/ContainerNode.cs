@@ -27,11 +27,9 @@ namespace BurstTrie
             count++;
             if (Count >= 5)
             {
-                return new InternalNode(this.ParentTrie, Values, index);
+                return new InternalNode(ParentTrie, Values, index);
             }
             return this;
-
-            // throw new NotImplementedException();
         }
 
         public override BurstNode? Remove(string value, int index, out bool success)

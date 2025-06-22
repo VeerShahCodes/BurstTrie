@@ -28,13 +28,33 @@ namespace BurstTrie
 
         public override BurstNode Insert(string value, int index)
         {
+            if (index >= value.Length)
+            {
+                if (otherNodes[0] == null)
+                {
+                    otherNodes[0] = new ContainerNode(ParentTrie);
+
+                }
+
+
+                otherNodes[0].Insert(value, index);
+                return this;
+            }
             if (otherNodes[value[index] - 'a' + 1] == null)
             {
                 otherNodes[value[index] - 'a' + 1] = new ContainerNode(ParentTrie);
             }
-            otherNodes[value[index] - 'a' + 1] = otherNodes[value[index] - 'a' + 1].Insert(value, index + 1);
+            if(index < value.Length - 1)
+            {
+                otherNodes[value[index] - 'a' + 1] = otherNodes[value[index] - 'a' + 1].Insert(value, index + 1);
+
+            }
+            else
+            {
+                otherNodes[value[index] - 'a' + 1] = otherNodes[value[index] - 'a' + 1].Insert(value, index);
+            }
+
             count++;
-            if (count == 0) return null;
             return this;
 
         }
@@ -47,8 +67,7 @@ namespace BurstTrie
                 success = false;
                 return null;
             }
-            otherNodes[value[index] - 'a' + 1] = otherNodes[value[index] - 'a' + 1].Remove(value, index + 1, out bool success2);
-            success = success2;
+            otherNodes[value[index] - 'a' + 1] = otherNodes[value[index] - 'a' + 1].Remove(value, index + 1, out success);
             count--;
             return this;
         }

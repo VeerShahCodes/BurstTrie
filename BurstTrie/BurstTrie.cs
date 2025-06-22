@@ -3,6 +3,7 @@
     public class BurstTrie
     {
         BurstNode Root { get; set; }
+        List<string> values => GetAll();
         public BurstTrie()
         {
             Root = new ContainerNode(this);
@@ -26,9 +27,24 @@
 
         public List<string> GetAll()
         {
-            List<string> output = new List<string>();
+            List<string> output = [];
             Root.GetAll(output);
             return output;
+        }
+
+        public List<string> BurstSort(List<string> values)
+        {
+            foreach(string value in values)
+            {
+                Insert(value);
+            }
+            List<string> sorted = GetAll();
+          
+            foreach (string value in values)
+            {
+                Remove(value);
+            }
+            return sorted;
         }
     }
 }
